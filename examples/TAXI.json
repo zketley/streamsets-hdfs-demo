@@ -1,0 +1,888 @@
+{
+  "pipelineConfig" : {
+    "schemaVersion" : 2,
+    "version" : 5,
+    "uuid" : "727026a7-1171-46fa-90d5-2af103c03a16",
+    "title" : "Taxi",
+    "description" : "",
+    "configuration" : [ {
+      "name" : "executionMode",
+      "value" : "STANDALONE"
+    }, {
+      "name" : "deliveryGuarantee",
+      "value" : "AT_LEAST_ONCE"
+    }, {
+      "name" : "shouldRetry",
+      "value" : true
+    }, {
+      "name" : "retryAttempts",
+      "value" : -1
+    }, {
+      "name" : "memoryLimit",
+      "value" : "${jvm:maxMemoryMB() * 0.65}"
+    }, {
+      "name" : "memoryLimitExceeded",
+      "value" : "STOP_PIPELINE"
+    }, {
+      "name" : "notifyOnStates",
+      "value" : [ "RUN_ERROR", "STOPPED", "FINISHED" ]
+    }, {
+      "name" : "emailIDs",
+      "value" : [ ]
+    }, {
+      "name" : "constants",
+      "value" : [ ]
+    }, {
+      "name" : "badRecordsHandling",
+      "value" : "streamsets-datacollector-basic-lib::com_streamsets_pipeline_stage_destination_recordstolocalfilesystem_ToErrorLocalFSDTarget::1"
+    }, {
+      "name" : "clusterSlaveMemory",
+      "value" : 1024
+    }, {
+      "name" : "clusterSlaveJavaOpts",
+      "value" : "-XX:PermSize=128M -XX:MaxPermSize=256M -Dhttps.protocols=TLSv1.2,TLSv1.1 -Dlog4j.debug"
+    }, {
+      "name" : "clusterLauncherEnv",
+      "value" : [ ]
+    }, {
+      "name" : "mesosDispatcherURL",
+      "value" : null
+    }, {
+      "name" : "hdfsS3ConfDir",
+      "value" : null
+    }, {
+      "name" : "rateLimit",
+      "value" : 0
+    }, {
+      "name" : "statsAggregatorStage",
+      "value" : ""
+    } ],
+    "uiInfo" : {
+      "previewConfig" : {
+        "previewSource" : "CONFIGURED_SOURCE",
+        "batchSize" : 10,
+        "timeout" : 10000,
+        "writeToDestinations" : false,
+        "showHeader" : false,
+        "showFieldType" : true,
+        "rememberMe" : true
+      }
+    },
+    "stages" : [ {
+      "instanceName" : "Directory_01",
+      "library" : "streamsets-datacollector-basic-lib",
+      "stageName" : "com_streamsets_pipeline_stage_origin_spooldir_SpoolDirDSource",
+      "stageVersion" : "9",
+      "configuration" : [ {
+        "name" : "conf.dataFormatConfig.compression",
+        "value" : "NONE"
+      }, {
+        "name" : "conf.dataFormatConfig.filePatternInArchive",
+        "value" : "*"
+      }, {
+        "name" : "conf.dataFormatConfig.charset",
+        "value" : "UTF-8"
+      }, {
+        "name" : "conf.dataFormatConfig.removeCtrlChars",
+        "value" : false
+      }, {
+        "name" : "conf.dataFormatConfig.textMaxLineLen",
+        "value" : 1024
+      }, {
+        "name" : "conf.dataFormatConfig.useCustomDelimiter",
+        "value" : false
+      }, {
+        "name" : "conf.dataFormatConfig.customDelimiter",
+        "value" : "\\r\\n"
+      }, {
+        "name" : "conf.dataFormatConfig.includeCustomDelimiterInTheText",
+        "value" : false
+      }, {
+        "name" : "conf.dataFormatConfig.jsonContent",
+        "value" : "MULTIPLE_OBJECTS"
+      }, {
+        "name" : "conf.dataFormatConfig.jsonMaxObjectLen",
+        "value" : 4096
+      }, {
+        "name" : "conf.dataFormatConfig.csvFileFormat",
+        "value" : "CSV"
+      }, {
+        "name" : "conf.dataFormatConfig.csvHeader",
+        "value" : "WITH_HEADER"
+      }, {
+        "name" : "conf.dataFormatConfig.csvMaxObjectLen",
+        "value" : 1024
+      }, {
+        "name" : "conf.dataFormatConfig.csvCustomDelimiter",
+        "value" : "|"
+      }, {
+        "name" : "conf.dataFormatConfig.csvCustomEscape",
+        "value" : "\\"
+      }, {
+        "name" : "conf.dataFormatConfig.csvCustomQuote",
+        "value" : "\""
+      }, {
+        "name" : "conf.dataFormatConfig.csvRecordType",
+        "value" : "LIST_MAP"
+      }, {
+        "name" : "conf.dataFormatConfig.csvSkipStartLines",
+        "value" : 0
+      }, {
+        "name" : "conf.dataFormatConfig.parseNull",
+        "value" : false
+      }, {
+        "name" : "conf.dataFormatConfig.nullConstant",
+        "value" : "\\\\N"
+      }, {
+        "name" : "conf.dataFormatConfig.xmlRecordElement",
+        "value" : null
+      }, {
+        "name" : "conf.dataFormatConfig.xPathNamespaceContext",
+        "value" : [ ]
+      }, {
+        "name" : "conf.dataFormatConfig.xmlMaxObjectLen",
+        "value" : 4096
+      }, {
+        "name" : "conf.dataFormatConfig.logMode",
+        "value" : "COMMON_LOG_FORMAT"
+      }, {
+        "name" : "conf.dataFormatConfig.logMaxObjectLen",
+        "value" : 1024
+      }, {
+        "name" : "conf.dataFormatConfig.retainOriginalLine",
+        "value" : false
+      }, {
+        "name" : "conf.dataFormatConfig.customLogFormat",
+        "value" : "%h %l %u %t \"%r\" %>s %b"
+      }, {
+        "name" : "conf.dataFormatConfig.regex",
+        "value" : "^(\\S+) (\\S+) (\\S+) \\[([\\w:/]+\\s[+\\-]\\d{4})\\] \"(\\S+) (\\S+) (\\S+)\" (\\d{3}) (\\d+)"
+      }, {
+        "name" : "conf.dataFormatConfig.fieldPathsToGroupName",
+        "value" : [ {
+          "fieldPath" : "/",
+          "group" : 1
+        } ]
+      }, {
+        "name" : "conf.dataFormatConfig.grokPatternDefinition",
+        "value" : null
+      }, {
+        "name" : "conf.dataFormatConfig.grokPattern",
+        "value" : "%{COMMONAPACHELOG}"
+      }, {
+        "name" : "conf.dataFormatConfig.onParseError",
+        "value" : "ERROR"
+      }, {
+        "name" : "conf.dataFormatConfig.maxStackTraceLines",
+        "value" : 50
+      }, {
+        "name" : "conf.dataFormatConfig.enableLog4jCustomLogFormat",
+        "value" : false
+      }, {
+        "name" : "conf.dataFormatConfig.log4jCustomLogFormat",
+        "value" : "%r [%t] %-5p %c %x - %m%n"
+      }, {
+        "name" : "conf.dataFormatConfig.avroSchema",
+        "value" : null
+      }, {
+        "name" : "conf.dataFormatConfig.schemaRegistryUrls",
+        "value" : [ ]
+      }, {
+        "name" : "conf.dataFormatConfig.schemaLookupMode",
+        "value" : "SUBJECT"
+      }, {
+        "name" : "conf.dataFormatConfig.subject",
+        "value" : null
+      }, {
+        "name" : "conf.dataFormatConfig.schemaId",
+        "value" : null
+      }, {
+        "name" : "conf.dataFormatConfig.protoDescriptorFile",
+        "value" : null
+      }, {
+        "name" : "conf.dataFormatConfig.messageType",
+        "value" : null
+      }, {
+        "name" : "conf.dataFormatConfig.isDelimited",
+        "value" : true
+      }, {
+        "name" : "conf.dataFormatConfig.binaryMaxObjectLen",
+        "value" : 1024
+      }, {
+        "name" : "conf.dataFormatConfig.datagramMode",
+        "value" : "SYSLOG"
+      }, {
+        "name" : "conf.dataFormatConfig.typesDbPath",
+        "value" : null
+      }, {
+        "name" : "conf.dataFormatConfig.convertTime",
+        "value" : false
+      }, {
+        "name" : "conf.dataFormatConfig.excludeInterval",
+        "value" : true
+      }, {
+        "name" : "conf.dataFormatConfig.authFilePath",
+        "value" : null
+      }, {
+        "name" : "conf.dataFormatConfig.wholeFileMaxObjectLen",
+        "value" : 8192
+      }, {
+        "name" : "conf.dataFormatConfig.rateLimit",
+        "value" : "-1"
+      }, {
+        "name" : "conf.dataFormat",
+        "value" : "DELIMITED"
+      }, {
+        "name" : "conf.spoolDir",
+        "value" : "/opt/files/tutorial/origin"
+      }, {
+        "name" : "conf.pathMatcherMode",
+        "value" : "GLOB"
+      }, {
+        "name" : "conf.filePattern",
+        "value" : "*.csv"
+      }, {
+        "name" : "conf.useLastModified",
+        "value" : "TIMESTAMP"
+      }, {
+        "name" : "conf.processSubdirectories",
+        "value" : false
+      }, {
+        "name" : "conf.allowLateDirectory",
+        "value" : false
+      }, {
+        "name" : "conf.overrunLimit",
+        "value" : 128
+      }, {
+        "name" : "conf.batchSize",
+        "value" : 1000
+      }, {
+        "name" : "conf.poolingTimeoutSecs",
+        "value" : 600
+      }, {
+        "name" : "conf.maxSpoolFiles",
+        "value" : 1000
+      }, {
+        "name" : "conf.initialFileToProcess",
+        "value" : null
+      }, {
+        "name" : "conf.errorArchiveDir",
+        "value" : null
+      }, {
+        "name" : "conf.postProcessing",
+        "value" : "NONE"
+      }, {
+        "name" : "conf.archiveDir",
+        "value" : null
+      }, {
+        "name" : "conf.retentionTimeMins",
+        "value" : 0
+      }, {
+        "name" : "stageOnRecordError",
+        "value" : "TO_ERROR"
+      } ],
+      "uiInfo" : {
+        "yPos" : 127,
+        "stageType" : "SOURCE",
+        "rawSource" : {
+          "configuration" : [ {
+            "name" : "fileName"
+          } ]
+        },
+        "description" : "",
+        "label" : "Directory 1",
+        "xPos" : 77.926025390625
+      },
+      "inputLanes" : [ ],
+      "outputLanes" : [ "Directory_01OutputLane14865465090510" ],
+      "eventLanes" : [ ]
+    }, {
+      "instanceName" : "StreamSelector_01",
+      "library" : "streamsets-datacollector-basic-lib",
+      "stageName" : "com_streamsets_pipeline_stage_processor_selector_SelectorDProcessor",
+      "stageVersion" : "1",
+      "configuration" : [ {
+        "name" : "lanePredicates",
+        "value" : [ {
+          "outputLane" : "StreamSelector_01OutputLane1486548102436",
+          "predicate" : "${record:value('/payment_type') == 'CRD'}"
+        }, {
+          "outputLane" : "StreamSelector_01OutputLane1486548026192",
+          "predicate" : "default"
+        } ]
+      }, {
+        "name" : "stageOnRecordError",
+        "value" : "TO_ERROR"
+      }, {
+        "name" : "stageRequiredFields",
+        "value" : [ "/payment_type" ]
+      }, {
+        "name" : "stageRecordPreconditions",
+        "value" : [ ]
+      } ],
+      "uiInfo" : {
+        "description" : "",
+        "label" : "Stream Selector 1",
+        "xPos" : 303,
+        "yPos" : 128,
+        "stageType" : "PROCESSOR"
+      },
+      "inputLanes" : [ "Directory_01OutputLane14865465090510" ],
+      "outputLanes" : [ "StreamSelector_01OutputLane1486548102436", "StreamSelector_01OutputLane1486548026192" ],
+      "eventLanes" : [ ]
+    }, {
+      "instanceName" : "JythonEvaluator_01",
+      "library" : "streamsets-datacollector-jython_2_7-lib",
+      "stageName" : "com_streamsets_pipeline_stage_processor_jython_JythonDProcessor",
+      "stageVersion" : "2",
+      "configuration" : [ {
+        "name" : "processingMode",
+        "value" : "BATCH"
+      }, {
+        "name" : "script",
+        "value" : "try: \n  for record in records:\n    cc = record.value['credit_card']\n    if cc == '':\n      error.write(record, \"Payment type was CRD, but credit card was null\")\n      continue\n\n    cc_type = ''\n    if cc.startswith('4'):\n      cc_type = 'Visa'\n    elif cc.startswith(('51','52','53','54','55')):\n      cc_type = 'MasterCard'\n    elif cc.startswith(('34','37')):\n      cc_type = 'AMEX'\n    elif cc.startswith(('300','301','302','303','304','305','36','38')):\n      cc_type = 'Diners Club'\n    elif cc.startswith(('6011','65')):\n      cc_type = 'Discover'\n    elif cc.startswith(('2131','1800','35')):\n      cc_type = 'JCB'\n    else:\n      cc_type = 'Other'\n\n    record.value['credit_card_type'] = cc_type\n\n    output.write(record)\nexcept Exception as e:\n  error.write(record, e.message)"
+      }, {
+        "name" : "stageOnRecordError",
+        "value" : "TO_ERROR"
+      }, {
+        "name" : "stageRequiredFields",
+        "value" : [ ]
+      }, {
+        "name" : "stageRecordPreconditions",
+        "value" : [ ]
+      } ],
+      "uiInfo" : {
+        "description" : "",
+        "label" : "Jython Evaluator 1",
+        "xPos" : 538,
+        "yPos" : 50,
+        "stageType" : "PROCESSOR"
+      },
+      "inputLanes" : [ "StreamSelector_01OutputLane1486548102436" ],
+      "outputLanes" : [ "JythonEvaluator_01OutputLane14865499081920" ],
+      "eventLanes" : [ ]
+    }, {
+      "instanceName" : "FieldMasker_01",
+      "library" : "streamsets-datacollector-basic-lib",
+      "stageName" : "com_streamsets_pipeline_stage_processor_fieldmask_FieldMaskDProcessor",
+      "stageVersion" : "1",
+      "configuration" : [ {
+        "name" : "fieldMaskConfigs",
+        "value" : [ {
+          "fields" : [ "/credit_card" ],
+          "maskType" : "VARIABLE_LENGTH",
+          "regex" : "(.*)([0-9]{4})",
+          "groupsToShow" : "2"
+        } ]
+      }, {
+        "name" : "stageOnRecordError",
+        "value" : "TO_ERROR"
+      }, {
+        "name" : "stageRequiredFields",
+        "value" : [ ]
+      }, {
+        "name" : "stageRecordPreconditions",
+        "value" : [ ]
+      } ],
+      "uiInfo" : {
+        "description" : "",
+        "label" : "Field Masker 1",
+        "xPos" : 760.0739135742188,
+        "yPos" : 50,
+        "stageType" : "PROCESSOR"
+      },
+      "inputLanes" : [ "JythonEvaluator_01OutputLane14865499081920" ],
+      "outputLanes" : [ "FieldMasker_01OutputLane14865502455920" ],
+      "eventLanes" : [ ]
+    }, {
+      "instanceName" : "ExpressionEvaluator_01",
+      "library" : "streamsets-datacollector-basic-lib",
+      "stageName" : "com_streamsets_pipeline_stage_processor_expression_ExpressionDProcessor",
+      "stageVersion" : "2",
+      "configuration" : [ {
+        "name" : "expressionProcessorConfigs",
+        "value" : [ {
+          "fieldToSet" : "/credit_card_type",
+          "expression" : "n/a"
+        } ]
+      }, {
+        "name" : "headerAttributeConfigs",
+        "value" : [ ]
+      }, {
+        "name" : "fieldAttributeConfigs",
+        "value" : [ ]
+      }, {
+        "name" : "stageOnRecordError",
+        "value" : "TO_ERROR"
+      }, {
+        "name" : "stageRequiredFields",
+        "value" : [ ]
+      }, {
+        "name" : "stageRecordPreconditions",
+        "value" : [ ]
+      } ],
+      "uiInfo" : {
+        "description" : "",
+        "label" : "Expression Evaluator 1",
+        "xPos" : 622,
+        "yPos" : 210,
+        "stageType" : "PROCESSOR"
+      },
+      "inputLanes" : [ "StreamSelector_01OutputLane1486548026192" ],
+      "outputLanes" : [ "ExpressionEvaluator_01OutputLane14865507055580" ],
+      "eventLanes" : [ ]
+    }, {
+      "instanceName" : "HadoopFS_01",
+      "library" : "streamsets-datacollector-hdp_2_5-lib",
+      "stageName" : "com_streamsets_pipeline_stage_destination_hdfs_HdfsDTarget",
+      "stageVersion" : "4",
+      "configuration" : [ {
+        "name" : "hdfsTargetConfigBean.hdfsUri",
+        "value" : "hdfs://hdfs:9000"
+      }, {
+        "name" : "hdfsTargetConfigBean.hdfsUser",
+        "value" : null
+      }, {
+        "name" : "hdfsTargetConfigBean.hdfsKerberos",
+        "value" : false
+      }, {
+        "name" : "hdfsTargetConfigBean.hdfsConfDir",
+        "value" : null
+      }, {
+        "name" : "hdfsTargetConfigBean.hdfsConfigs",
+        "value" : [ ]
+      }, {
+        "name" : "hdfsTargetConfigBean.uniquePrefix",
+        "value" : "out_"
+      }, {
+        "name" : "hdfsTargetConfigBean.fileNameSuffix",
+        "value" : null
+      }, {
+        "name" : "hdfsTargetConfigBean.dirPathTemplateInHeader",
+        "value" : false
+      }, {
+        "name" : "hdfsTargetConfigBean.dirPathTemplate",
+        "value" : "/opt/files/destination"
+      }, {
+        "name" : "hdfsTargetConfigBean.timeZoneID",
+        "value" : "UTC"
+      }, {
+        "name" : "hdfsTargetConfigBean.timeDriver",
+        "value" : "${time:now()}"
+      }, {
+        "name" : "hdfsTargetConfigBean.maxRecordsPerFile",
+        "value" : 0
+      }, {
+        "name" : "hdfsTargetConfigBean.maxFileSize",
+        "value" : 5
+      }, {
+        "name" : "hdfsTargetConfigBean.idleTimeout",
+        "value" : "${1 * HOURS}"
+      }, {
+        "name" : "hdfsTargetConfigBean.compression",
+        "value" : "NONE"
+      }, {
+        "name" : "hdfsTargetConfigBean.otherCompression",
+        "value" : null
+      }, {
+        "name" : "hdfsTargetConfigBean.fileType",
+        "value" : "TEXT"
+      }, {
+        "name" : "hdfsTargetConfigBean.keyEl",
+        "value" : "${uuid()}"
+      }, {
+        "name" : "hdfsTargetConfigBean.seqFileCompressionType",
+        "value" : "BLOCK"
+      }, {
+        "name" : "hdfsTargetConfigBean.lateRecordsLimit",
+        "value" : "${1 * HOURS}"
+      }, {
+        "name" : "hdfsTargetConfigBean.rollIfHeader",
+        "value" : false
+      }, {
+        "name" : "hdfsTargetConfigBean.rollHeaderName",
+        "value" : "roll"
+      }, {
+        "name" : "hdfsTargetConfigBean.lateRecordsAction",
+        "value" : "SEND_TO_ERROR"
+      }, {
+        "name" : "hdfsTargetConfigBean.lateRecordsDirPathTemplate",
+        "value" : "/tmp/late/${YYYY()}-${MM()}-${DD()}"
+      }, {
+        "name" : "hdfsTargetConfigBean.dataFormat",
+        "value" : "DELIMITED"
+      }, {
+        "name" : "hdfsTargetConfigBean.hdfsPermissionCheck",
+        "value" : true
+      }, {
+        "name" : "hdfsTargetConfigBean.permissionEL",
+        "value" : null
+      }, {
+        "name" : "hdfsTargetConfigBean.skipOldTempFileRecovery",
+        "value" : false
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.charset",
+        "value" : "UTF-8"
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.csvFileFormat",
+        "value" : "CSV"
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.csvHeader",
+        "value" : "WITH_HEADER"
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.csvReplaceNewLines",
+        "value" : true
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.csvReplaceNewLinesString",
+        "value" : ""
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.csvCustomDelimiter",
+        "value" : "|"
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.csvCustomEscape",
+        "value" : "\\"
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.csvCustomQuote",
+        "value" : "\""
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.jsonMode",
+        "value" : "MULTIPLE_OBJECTS"
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.textFieldPath",
+        "value" : "/text"
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.textRecordSeparator",
+        "value" : "\\n"
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.textEmptyLineIfNull",
+        "value" : false
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.avroSchemaSource",
+        "value" : null
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.avroSchema",
+        "value" : null
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.registerSchema",
+        "value" : false
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.schemaRegistryUrlsForRegistration",
+        "value" : [ ]
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.schemaRegistryUrls",
+        "value" : [ ]
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.schemaLookupMode",
+        "value" : "SUBJECT"
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.subject",
+        "value" : null
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.subjectToRegister",
+        "value" : null
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.schemaId",
+        "value" : null
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.avroCompression",
+        "value" : "NULL"
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.binaryFieldPath",
+        "value" : "/"
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.protoDescriptorFile",
+        "value" : null
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.messageType",
+        "value" : null
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.fileNameEL",
+        "value" : null
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.wholeFileExistsAction",
+        "value" : "TO_ERROR"
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.includeChecksumInTheEvents",
+        "value" : false
+      }, {
+        "name" : "hdfsTargetConfigBean.dataGeneratorFormatConfig.checksumAlgorithm",
+        "value" : "MD5"
+      }, {
+        "name" : "stageOnRecordError",
+        "value" : "TO_ERROR"
+      }, {
+        "name" : "stageRequiredFields",
+        "value" : [ ]
+      }, {
+        "name" : "stageRecordPreconditions",
+        "value" : [ ]
+      } ],
+      "uiInfo" : {
+        "description" : "",
+        "label" : "Hadoop FS 1",
+        "xPos" : 1006.7042236328125,
+        "yPos" : 63.92604064941406,
+        "stageType" : "TARGET"
+      },
+      "inputLanes" : [ "FieldMasker_01OutputLane14865502455920", "ExpressionEvaluator_01OutputLane14865507055580" ],
+      "outputLanes" : [ ],
+      "eventLanes" : [ ]
+    }, {
+      "instanceName" : "FieldTypeConverter_01",
+      "library" : "streamsets-datacollector-basic-lib",
+      "stageName" : "com_streamsets_pipeline_stage_processor_fieldtypeconverter_FieldTypeConverterDProcessor",
+      "stageVersion" : "1",
+      "configuration" : [ {
+        "name" : "convertBy",
+        "value" : "BY_FIELD"
+      }, {
+        "name" : "fieldTypeConverterConfigs",
+        "value" : [ {
+          "fields" : [ "/dropoff_datetime", "/pickup_datetime" ],
+          "targetType" : "DATETIME",
+          "treatInputFieldAsDate" : false,
+          "dataLocale" : "en,US",
+          "scale" : -1,
+          "decimalScaleRoundingStrategy" : "ROUND_UNNECESSARY",
+          "dateFormat" : "YYYY_MM_DD_HH_MM_SS",
+          "encoding" : "UTF-8"
+        }, {
+          "fields" : [ "/fare_amount", "/dropoff_latitude", "/dropoff_longitude", "/mta_tax", "/pickup_longitude", "/pickup_latitude", "/tip_amount", "/surcharge", "/tolls_amount", "/total_amount" ],
+          "targetType" : "DOUBLE",
+          "treatInputFieldAsDate" : false,
+          "dataLocale" : "en,US",
+          "scale" : -1,
+          "decimalScaleRoundingStrategy" : "ROUND_UNNECESSARY",
+          "dateFormat" : "YYYY_MM_DD",
+          "encoding" : "UTF-8"
+        } ]
+      }, {
+        "name" : "wholeTypeConverterConfigs",
+        "value" : [ {
+          "sourceType" : "INTEGER",
+          "targetType" : "INTEGER",
+          "treatInputFieldAsDate" : false,
+          "dataLocale" : "en,US",
+          "scale" : -1,
+          "decimalScaleRoundingStrategy" : "ROUND_UNNECESSARY",
+          "dateFormat" : "YYYY_MM_DD",
+          "encoding" : "UTF-8"
+        } ]
+      }, {
+        "name" : "stageOnRecordError",
+        "value" : "TO_ERROR"
+      }, {
+        "name" : "stageRequiredFields",
+        "value" : [ ]
+      }, {
+        "name" : "stageRecordPreconditions",
+        "value" : [ ]
+      } ],
+      "uiInfo" : {
+        "description" : "",
+        "label" : "Field Type Converter 1",
+        "xPos" : 896,
+        "yPos" : 225,
+        "stageType" : "PROCESSOR"
+      },
+      "inputLanes" : [ "FieldMasker_01OutputLane14865502455920", "ExpressionEvaluator_01OutputLane14865507055580" ],
+      "outputLanes" : [ "FieldTypeConverter_01OutputLane14865517514880" ],
+      "eventLanes" : [ ]
+    }, {
+      "instanceName" : "ExpressionEvaluator_02",
+      "library" : "streamsets-datacollector-basic-lib",
+      "stageName" : "com_streamsets_pipeline_stage_processor_expression_ExpressionDProcessor",
+      "stageVersion" : "2",
+      "configuration" : [ {
+        "name" : "expressionProcessorConfigs",
+        "value" : [ {
+          "fieldToSet" : "/pickup_location",
+          "expression" : "${record:value('/pickup_latitude')}, ${record:value('/pickup_longitude')}"
+        }, {
+          "fieldToSet" : "/dropoff_location",
+          "expression" : "${record:value('/dropoff_latitude')}, ${record:value('/dropoff_longitude')}"
+        }, {
+          "fieldToSet" : "/trip_revenue",
+          "expression" : "${record:value('/total_amount') - record:value('/tip_amount')}"
+        } ]
+      }, {
+        "name" : "headerAttributeConfigs",
+        "value" : [ ]
+      }, {
+        "name" : "fieldAttributeConfigs",
+        "value" : [ ]
+      }, {
+        "name" : "stageOnRecordError",
+        "value" : "TO_ERROR"
+      }, {
+        "name" : "stageRequiredFields",
+        "value" : [ ]
+      }, {
+        "name" : "stageRecordPreconditions",
+        "value" : [ ]
+      } ],
+      "uiInfo" : {
+        "description" : "",
+        "label" : "Expression Evaluator 2",
+        "xPos" : 1102,
+        "yPos" : 223,
+        "stageType" : "PROCESSOR"
+      },
+      "inputLanes" : [ "FieldTypeConverter_01OutputLane14865517514880" ],
+      "outputLanes" : [ "ExpressionEvaluator_02OutputLane14865519281550" ],
+      "eventLanes" : [ ]
+    }, {
+      "instanceName" : "Trash_01",
+      "library" : "streamsets-datacollector-basic-lib",
+      "stageName" : "com_streamsets_pipeline_stage_destination_devnull_NullDTarget",
+      "stageVersion" : "1",
+      "configuration" : [ ],
+      "uiInfo" : {
+        "description" : "",
+        "label" : "Trash 1",
+        "xPos" : 1282,
+        "yPos" : 112,
+        "stageType" : "TARGET"
+      },
+      "inputLanes" : [ "ExpressionEvaluator_02OutputLane14865519281550" ],
+      "outputLanes" : [ ],
+      "eventLanes" : [ ]
+    } ],
+    "errorStage" : {
+      "instanceName" : "WritetoFile_ErrorStage",
+      "library" : "streamsets-datacollector-basic-lib",
+      "stageName" : "com_streamsets_pipeline_stage_destination_recordstolocalfilesystem_ToErrorLocalFSDTarget",
+      "stageVersion" : "1",
+      "configuration" : [ {
+        "name" : "directory",
+        "value" : "/opt/files/tutorial/error"
+      }, {
+        "name" : "uniquePrefix",
+        "value" : "err_"
+      }, {
+        "name" : "rotationIntervalSecs",
+        "value" : "${1 * HOURS}"
+      }, {
+        "name" : "maxFileSizeMbs",
+        "value" : 5
+      } ],
+      "uiInfo" : {
+        "description" : "",
+        "label" : "Error Records - Write to File",
+        "xPos" : 60,
+        "yPos" : 50,
+        "stageType" : "TARGET"
+      },
+      "inputLanes" : [ ],
+      "outputLanes" : [ ],
+      "eventLanes" : [ ]
+    },
+    "info" : {
+      "name" : "c3ff66b7-a006-4286-a9d3-cfe72e66be5d",
+      "title" : "b,lah",
+      "description" : "",
+      "created" : 1486989356754,
+      "lastModified" : 1486989406241,
+      "creator" : "admin",
+      "lastModifier" : "admin",
+      "lastRev" : "0",
+      "uuid" : "727026a7-1171-46fa-90d5-2af103c03a16",
+      "valid" : true,
+      "metadata" : {
+        "labels" : [ ]
+      }
+    },
+    "metadata" : {
+      "labels" : [ ]
+    },
+    "statsAggregatorStage" : null,
+    "valid" : true,
+    "issues" : {
+      "stageIssues" : { },
+      "pipelineIssues" : [ ],
+      "issueCount" : 0
+    },
+    "previewable" : true
+  },
+  "pipelineRules" : {
+    "metricsRuleDefinitions" : [ {
+      "id" : "badRecordsAlertID",
+      "alertText" : "High incidence of Error Records",
+      "metricId" : "pipeline.batchErrorRecords.counter",
+      "metricType" : "COUNTER",
+      "metricElement" : "COUNTER_COUNT",
+      "condition" : "${value() > 100}",
+      "sendEmail" : false,
+      "enabled" : false,
+      "timestamp" : 1486546228648,
+      "valid" : true
+    }, {
+      "id" : "stageErrorAlertID",
+      "alertText" : "High incidence of Stage Errors",
+      "metricId" : "pipeline.batchErrorMessages.counter",
+      "metricType" : "COUNTER",
+      "metricElement" : "COUNTER_COUNT",
+      "condition" : "${value() > 100}",
+      "sendEmail" : false,
+      "enabled" : false,
+      "timestamp" : 1486546228648,
+      "valid" : true
+    }, {
+      "id" : "idleGaugeID",
+      "alertText" : "Pipeline is Idle",
+      "metricId" : "RuntimeStatsGauge.gauge",
+      "metricType" : "GAUGE",
+      "metricElement" : "TIME_OF_LAST_RECEIVED_RECORD",
+      "condition" : "${time:now() - value() > 120000}",
+      "sendEmail" : false,
+      "enabled" : false,
+      "timestamp" : 1486546228648,
+      "valid" : true
+    }, {
+      "id" : "batchTimeAlertID",
+      "alertText" : "Batch taking more time to process",
+      "metricId" : "RuntimeStatsGauge.gauge",
+      "metricType" : "GAUGE",
+      "metricElement" : "CURRENT_BATCH_AGE",
+      "condition" : "${value() > 200}",
+      "sendEmail" : false,
+      "enabled" : false,
+      "timestamp" : 1486546228648,
+      "valid" : true
+    }, {
+      "id" : "memoryLimitAlertID",
+      "alertText" : "Memory limit for pipeline exceeded",
+      "metricId" : "pipeline.memoryConsumed.counter",
+      "metricType" : "COUNTER",
+      "metricElement" : "COUNTER_COUNT",
+      "condition" : "${value() > (jvm:maxMemoryMB() * 0.65)}",
+      "sendEmail" : false,
+      "enabled" : false,
+      "timestamp" : 1486546228648,
+      "valid" : true
+    } ],
+    "dataRuleDefinitions" : [ {
+      "id" : "dataRule1486550923680",
+      "label" : "Missing Card Numbers",
+      "lane" : "StreamSelector_01OutputLane1486548102436",
+      "samplingPercentage" : 35.0,
+      "samplingRecordsToRetain" : 10,
+      "condition" : "${record:value(\"/credit_card\") == \"\"}",
+      "alertEnabled" : true,
+      "alertText" : "At least 10 missing credit card numbers!",
+      "thresholdType" : "COUNT",
+      "thresholdValue" : "10",
+      "minVolume" : 1000,
+      "meterEnabled" : true,
+      "sendEmail" : false,
+      "enabled" : true,
+      "timestamp" : 0,
+      "valid" : true
+    } ],
+    "driftRuleDefinitions" : [ ],
+    "emailIds" : [ ],
+    "uuid" : "0df30ad4-cb32-4576-bfec-587c6242c261",
+    "ruleIssues" : [ ]
+  },
+  "libraryDefinitions" : null
+}

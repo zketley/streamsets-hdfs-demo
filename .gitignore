@@ -1,0 +1,10 @@
+# Ignore Vagrant files
+.vagrant/*
+*/.vagrant/*
+
+# Packer build files
+*.iso
+*.box
+
+# IDE files
+.idea
