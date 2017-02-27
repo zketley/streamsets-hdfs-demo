@@ -86,7 +86,7 @@ docker-compose start
 
 MIT License
 
-Copyright (c) [2017] [Dominic Ketley]
+Copyright (c) 2017 Dominic Ketley
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
