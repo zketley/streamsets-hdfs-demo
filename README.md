@@ -2,7 +2,7 @@
 
 You must accept the Oracle Binary Code License Agreement for Java SE to use the StreamSets image.
 
-This project provides a simple way to spin up [StreamSets](https://streamsets.com/) and a standlone [Hadoop](http://hadoop.apache.org/) Docker containers. 
+This project provides a simple way to spin up [StreamSets](https://streamsets.com/) and a standalone [Hadoop](http://hadoop.apache.org/) Docker containers. 
 Linux, Windows and Mac are all supported. On Linux, the Docker containers are spun up directly. On Mac and Windows they are spun up in an Ubuntu 16.04 Virtualbox host VM. An example pipeline is provided, based on the [Taxi payments tutorial](https://streamsets.com/documentation/datacollector/latest/help/#Tutorial/ExtendedTutorial.html#concept_w4n_gjt_ls). The data is outputted to HDFS running in the Hadoop container.
 
 ## Getting started
