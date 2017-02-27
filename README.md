@@ -1,5 +1,7 @@
 # StreamSets demo
 
+You must accept the Oracle Binary Code License Agreement for Java SE to use the StreamSets image.
+
 This project provides a simple way to spin up [StreamSets](https://streamsets.com/) and a standlone [Hadoop](http://hadoop.apache.org/) Docker containers. 
 Linux, Windows and Mac are all supported. On Linux, the Docker containers are spun up directly. On Mac and Windows they are spun up in an Ubuntu 16.04 Virtualbox host VM. An example pipeline is provided, based on the [Taxi payments tutorial](https://streamsets.com/documentation/datacollector/latest/help/#Tutorial/ExtendedTutorial.html#concept_w4n_gjt_ls). The data is outputted to HDFS running in the Hadoop container.
 
@@ -62,7 +64,7 @@ hdfs <IP of your Linux host>
 * Navigate to `http://localhost:50070/explorer.html#/opt/files/destination` to see the output files.
   Note the output will be prefixed `_tmp_` while the pipeline is running. Once you stop the pipeline, the files will be renamed to `out_`. You can download them from here.
 
-## Other stuff that you probably won't need
+## Other bits and pieces
 
 ### (Windows / Mac only) Accessing the Ubuntu host
 
@@ -75,11 +77,15 @@ vagrant ssh
 
 * From within the StreamSets app, navigate to Package Manager
 * Copy the library name you want
-* Add the library name to `PACKAGES_TO_INSTALL` in `docker/streamsets/Dockerfile`
+* Uncomment out the relevant `build` lines in `docker-compose.yml`
+* Comment out the `sdc` `image` line in `docker-compose.yml`
+* Add the library name to `PACKAGES_TO_INSTALL` in `docker-compose.yml`
 * From the Linux host, run
 ```
-docker-compose stop
-docker-compose start
+docker-compose stop sdc
+docker-compose rm --force sdc
+docker-compose build sdc
+docker-compose up -d sdc
 ```
 
 ### License

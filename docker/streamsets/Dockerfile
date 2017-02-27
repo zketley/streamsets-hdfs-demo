@@ -1,9 +1,10 @@
 FROM streamsets/datacollector:2.3.0.0
 
-ENV PACKAGES_TO_INSTALL streamsets-datacollector-hdp_2_5-lib,streamsets-datacollector-jython_2_7-lib
+# Build time argument to install packages
+ARG PACKAGES_TO_INSTALL=streamsets-datacollector-hdp_2_5-lib,streamsets-datacollector-jython_2_7-lib
 
 # Install the packages
-RUN $SDC_DIST/bin/streamsets stagelibs -install=$PACKAGES_TO_INSTALL
+RUN if [[ ! -z $PACKAGES_TO_INSTALL ]]; then $SDC_DIST/bin/streamsets stagelibs -install=$PACKAGES_TO_INSTALL ; fi
 
 # Setup the directory tree for the taxi tutorial
 # https://streamsets.com/documentation/datacollector/latest/help/#Tutorial/BeforeYouBegin.html#concept_hg5_j2p_ms

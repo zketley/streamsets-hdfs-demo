@@ -1,27 +1,34 @@
-hdfs:
-  build: docker/hdfs
-  hostname: hdfs
-  container_name: hdfs
-  ports:
-    - 50070:50070
-    - 50075:50075
+version: '3.0'
+services:
+  hdfs:
+    image: dketley/sdc-hdfs
+    hostname: hdfs
+    container_name: hdfs
+    ports:
+      - 50070:50070
+      - 50075:50075
 
-sdc:
-  build: docker/streamsets
-  hostname: sdc
-  container_name: sdc
-  links:
-    - hdfs
-  ports:
-    - 18630:18630
+  sdc:
+  # Uncomment these lines if you need to build the docker image locally
+  #  build:
+  #    context: docker/streamsets
+  #    args:
+  #      - PACKAGES_TO_INSTALL=streamsets-datacollector-hdp_2_5-lib,streamsets-datacollector-jython_2_7-lib
+    image: dketley/sdc  # Comment this out if you need to build the docker image locally
+    hostname: sdc
+    container_name: sdc
+    links:
+      - hdfs
+    ports:
+      - 18630:18630
 
-# Start DNS server so that HDFS download links work on the Linux host
-dns:
-  image: mgood/resolvable
-  hostname: dns
-  container_name: dns
-  volumes:
-    - /var/run/docker.sock:/tmp/docker.sock
-    - /etc/resolv.conf:/tmp/resolv.conf
+  # Start DNS server so that HDFS download links work on the Linux host
+  dns:
+    image: mgood/resolvable
+    hostname: dns
+    container_name: dns
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+      - /etc/resolv.conf:/tmp/resolv.conf
 
 
